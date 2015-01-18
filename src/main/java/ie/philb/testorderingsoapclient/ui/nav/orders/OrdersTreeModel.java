@@ -9,7 +9,6 @@ import ie.philb.testorderingsoapclient.ws.Order;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -29,21 +28,6 @@ public class OrdersTreeModel implements TreeModel {
         this.categories.addAll(orderCategories);
     }
 
-//    public void setOrderCategories(List<OrderCategory> categories) {
-//        this.categories.clear();
-//        this.categories.addAll(categories);
-//        
-//        List<Object> treePathObjects = new ArrayList<>();
-//        treePathObjects.add(root);
-//        treePathObjects.add(categories.get(0));
-//        
-////        TreeModelEvent evt = new TreeModelEvent(this, new TreePath(treePathObjects.toArray()));
-////                
-////        for (TreeModelListener tnl : treeModelListeners) {
-////            tnl.treeNodesChanged(evt);
-////        }
-//    }
-    
     public List<OrderCategory> getOrderCategories() {
         return categories;
     }
@@ -58,14 +42,12 @@ public class OrdersTreeModel implements TreeModel {
 
         Object child = null;
 
-        if (parent instanceof OrderCategory) {
-            OrderCategory oc = (OrderCategory) parent;
+        OrderCategory oc = (OrderCategory) parent;
 
-            if (oc.getId() == 0) {
-                child = categories.get(index);
-            } else {
-                child = oc.getOrders().get(index);
-            }
+        if (oc.getId() == 0) {
+            child = categories.get(index);
+        } else {
+            child = oc.getOrders().get(index);
         }
 
 //        System.out.println("Got child " + child + " from parent " + parent + ", idx " + index);
