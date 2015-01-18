@@ -30,6 +30,7 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
         initComponents();
         Application.getApplication().addListener(this);
 
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.setModel(new OrderTableModel());
         TableUtils.resizeColumns(jTable1, 50, 50, 250);
 
@@ -118,6 +119,8 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setForeground(new java.awt.Color(60, 60, 60));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -137,7 +140,8 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(238, 238, 238));
+        jTable1.setDoubleBuffered(true);
+        jTable1.setGridColor(new java.awt.Color(245, 245, 245));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
