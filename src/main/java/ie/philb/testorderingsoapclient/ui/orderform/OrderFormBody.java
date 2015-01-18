@@ -13,12 +13,16 @@ import ie.philb.testorderingsoapclient.ui.nav.orders.OrderCategory;
 import ie.philb.testorderingsoapclient.util.TableUtils;
 import ie.philb.testorderingsoapclient.ws.Order;
 import ie.philb.testorderingsoapclient.ws.Product;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.TransferHandler;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -32,6 +36,8 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
 
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.setModel(new OrderTableModel());
+        
+
         TableUtils.resizeColumns(jTable1, 50, 50, 250);
 
         setTransferHandler(new TransferHandler() {
@@ -115,7 +121,18 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new JTable() {
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+                Color stripeColor = new Color(250, 250, 250);
+
+                if (!isRowSelected(row)) {
+                    c.setBackground(row % 2 == 0 ? getBackground() : stripeColor);
+                }
+
+                return c;
+            }
+        };
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -142,6 +159,8 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
         });
         jTable1.setDoubleBuffered(true);
         jTable1.setGridColor(new java.awt.Color(245, 245, 245));
+        jTable1.setShowHorizontalLines(false);
+        jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -171,9 +190,9 @@ public class OrderFormBody extends javax.swing.JPanel implements ApplicationList
     @Override
     public void productsUpdated() {
     }
-    
+
     @Override
     public void categoryUpdated(OrderCategory category) {
-        
+
     }
 }
