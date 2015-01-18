@@ -12,7 +12,12 @@ import ie.philb.testorderingsoapclient.ui.nav.orders.OrderCategory;
 import ie.philb.testorderingsoapclient.ws.Order;
 import ie.philb.testorderingsoapclient.ws.Party;
 import ie.philb.testorderingsoapclient.ws.ServiceException_Exception;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,7 +55,21 @@ public class MainFrame extends javax.swing.JFrame implements ApplicationListener
         jSplitPane3 = new javax.swing.JSplitPane();
         ordersFolderPanel1 = new ie.philb.testorderingsoapclient.ui.nav.orders.OrdersFolderPanel();
         jPanel1 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
+        jToolBar1 = new javax.swing.JToolBar() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                int w = getWidth();
+                int h = getHeight();
+                Color color1 = new Color(227, 227, 227);
+                Color color2 = new Color(250, 250, 250);
+                GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, w, h);
+            }
+        };
         btnConnect = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();

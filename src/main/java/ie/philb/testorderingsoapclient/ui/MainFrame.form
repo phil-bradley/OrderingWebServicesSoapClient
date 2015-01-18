@@ -143,6 +143,9 @@
       <Properties>
         <Property name="rollover" type="boolean" value="true"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JToolBar() {&#xd;&#xa;    @Override&#xd;&#xa;    protected void paintComponent(Graphics g) {&#xd;&#xa;        super.paintComponent(g);&#xd;&#xa;        Graphics2D g2d = (Graphics2D) g;&#xd;&#xa;        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);&#xd;&#xa;        int w = getWidth();&#xd;&#xa;        int h = getHeight();&#xd;&#xa;        Color color1 = new Color(227, 227, 227);&#xd;&#xa;        Color color2 = new Color(250, 250, 250);&#xd;&#xa;        GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);&#xd;&#xa;        g2d.setPaint(gp);&#xd;&#xa;        g2d.fillRect(0, 0, w, h);&#xd;&#xa;    }&#xd;&#xa;}"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
